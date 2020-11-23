@@ -21,7 +21,10 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
         '''
         if index == tk.END:
             insert_index = len(self.widgets)
+        elif index == tk.ACTIVE:
+            insert_index = self.selected_index
         else:
+            # Clamp top range of index
             if index > len(self.widgets):
                 insert_index = len(self.widgets)
             else:
@@ -129,6 +132,8 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
         # Determine index to start get range
         if first == tk.END:
             get_start = len(self.widgets) - 1
+        elif first == tk.ACTIVE:
+            get_start = self.selected_index
         else:
             if first < 0:
                 get_start = 0
@@ -145,6 +150,8 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
         if last is not None:
             if last == tk.END:
                 get_end = len(self.widgets) - 1
+            elif last == tk.ACTIVE:
+                get_end = self.selected_index
             else:
                 get_end = last
         else:
@@ -158,7 +165,44 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
             return tuple(self.widgets[get_start:get_end + 1])
         else:
             # Get single item
-            return self.widgets[get_start]
+            if get_start < 0:
+                widget = None
+            else:
+                widget = self.widgets[get_start]
+
+            return widget
+
+    def activate(self, index):
+        '''Sets active element in listbox to element at index'''
+        if len(self.widgets) == 0:
+            return
+
+        # Determine index to activate
+        if index == tk.END:
+            activate_index = len(self.widgets) - 1
+        elif index == tk.ACTIVE:
+            activate_index = self.selected_index
+        else:
+            # Clamp top range of index
+            if index >= len(self.widgets):
+                activate_index = len(self.widgets) - 1
+            else:
+                activate_index = index
+
+        # Clamp bottom range of index
+        activate_index = max(0, activate_index)
+
+        # Select new index
+        self.widgets[activate_index].event_generate('<<ItemSelect>>')
+
+    def curselection(self):
+        '''
+        Returns tuple containing indices of all elements currently selected.
+        '''
+        if self.selected_index < 0:
+            return ()
+
+        return tuple(self.widgets[self.selected_index])
 
     def size(self):
         '''Returns the number of entries in the listbox'''
@@ -169,7 +213,8 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
 
         if self.selected_index != event_index:
             # Deselect previous selection
-            self.widgets[self.selected_index].deselect()
+            if self.selected_index >= 0:
+                self.widgets[self.selected_index].deselect()
 
             # Select new
             event.widget.select()

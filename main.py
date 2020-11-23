@@ -108,4 +108,14 @@ if __name__ == '__main__':
                           command=lambda: print(lb.get(0, tk.END)))
     gall_btn.grid(column=1, row=4, pady=(10, 0))
 
+    astart_btn = ttk.Button(test_frame,
+                            text='Activate Start',
+                            command=lambda: lb.activate(0))
+    astart_btn.grid(column=0, row=5, pady=(10, 0))
+
+    aend_btn = ttk.Button(test_frame,
+                          text='Activate End',
+                          command=lambda: lb.activate(tk.END))
+    aend_btn.grid(column=1, row=5, pady=(10, 0))
+
     root.mainloop()
