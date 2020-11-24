@@ -6,8 +6,7 @@ from tkinter import ttk
 
 class SimpleScrollableFrame(ttk.Frame):
     '''
-    UI element displaying widgets that can be scrolled through. UI element also
-    dynamically determines which widgets in the scrollable region are visible.
+    UI element displaying widgets that can be scrolled through.
     '''
     def __init__(self, master, *args, **kwargs):
         '''
