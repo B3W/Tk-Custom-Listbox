@@ -14,10 +14,6 @@ class SimpleScrollableFrame(ttk.Frame):
         Override of ttk.Frame's initialization function
 
         :param master: Widget's master
-        :param tpad: Padding applied around top of widgets in scroll frame
-        :param lpad: Padding applied around left of widgets in scroll frame
-        :param sfunc: Pointer to function to call on widgets set to visible
-        :param hfunc: Pointer to function to call on widgets set to hidden
         '''
         # Initialize root frame
         ttk.Frame.__init__(self, master, *args, **kwargs)

@@ -204,6 +204,25 @@ class ExtendedListbox(sf.SimpleScrollableFrame):
 
         return tuple(self.widgets[self.selected_index])
 
+    def index(self, index):
+        '''
+        Returns the numerical index (0 to size()-1) corresponding to the given
+        index. Index 'END' returns count of elements in listbox.
+        '''
+        if index == tk.END:
+            returned_index = len(self.widgets)
+        elif index == tk.ACTIVE:
+            returned_index = self.selected_index
+        else:
+            try:
+                returned_index = int(index)
+            except ValueError:
+                err_msg = f'Bad listbox index "{index}": ' \
+                        + 'must be active, end, or a number'
+                raise ValueError(err_msg)
+
+        return returned_index
+
     def size(self):
         '''Returns the number of entries in the listbox'''
         return len(self.widgets)
