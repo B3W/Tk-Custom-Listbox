@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import extendedlistbox as elb
+import CustomListbox as clb
 import listboxitem as lbi
 
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
                     background='dark gray')
 
     # Listbox
-    lb = elb.ExtendedListbox(root, style='Listbox.TFrame')
+    lb = clb.CustomListbox(root, style='Listbox.TFrame')
     lb.grid(column=0, row=0, sticky=tk.NSEW)
 
     # Frame holding manual testing buttons

@@ -2,7 +2,7 @@ import tkinter as tk
 import scrollableframe as sf
 
 
-class ExtendedListbox(sf.SimpleScrollableFrame):
+class CustomListbox(sf.SimpleScrollableFrame):
     '''UI element providing listbox-like functionality'''
     def __init__(self, master, *args, **kwargs):
         '''
