@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import CustomListbox as clb
+import customlistbox as clb
 import listboxitem as lbi
 
 

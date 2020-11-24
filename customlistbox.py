@@ -238,4 +238,3 @@ class CustomListbox(sf.SimpleScrollableFrame):
             # Select new
             event.widget.select()
             self.selected_index = event_index
-            print(self.selected_index)
