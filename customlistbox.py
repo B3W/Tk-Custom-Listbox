@@ -202,7 +202,7 @@ class CustomListbox(sf.SimpleScrollableFrame):
         if self.selected_index < 0:
             return ()
 
-        return tuple(self.widgets[self.selected_index])
+        return (self.widgets[self.selected_index],)
 
     def index(self, index):
         '''
@@ -238,3 +238,6 @@ class CustomListbox(sf.SimpleScrollableFrame):
             # Select new
             event.widget.select()
             self.selected_index = event_index
+
+        # Raise <<ListboxSelect>> event
+        self.event_generate('<<ListboxSelect>>')

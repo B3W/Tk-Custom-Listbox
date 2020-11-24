@@ -44,6 +44,7 @@ if __name__ == '__main__':
     # Listbox
     lb = clb.CustomListbox(root, style='Listbox.TFrame')
     lb.grid(column=0, row=0, sticky=tk.NSEW)
+    lb.bind('<<ListboxSelect>>', lambda e: print(lb.curselection()))
 
     # Frame holding manual testing buttons
     test_frame = ttk.Frame(root, style='TestArea.TFrame')
