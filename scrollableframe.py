@@ -25,7 +25,11 @@ class SimpleScrollableFrame(ttk.Frame):
         self.configuring = False
 
         # Initialize Canvas to hold 'scrollable' frame
-        self.canvas = tk.Canvas(self, highlightthickness=0, bg='red')
+        # NOTE  Specify initial width so canvas is not wider than it should be
+        self.canvas = tk.Canvas(self,
+                                highlightthickness=0,
+                                background='red',
+                                width=100)
         self.canvas.grid(column=0, row=0, sticky=tk.NSEW)
 
         # Initialize vertical AutoScrollbar and link to the Canvas
@@ -39,6 +43,7 @@ class SimpleScrollableFrame(ttk.Frame):
         # Initialize 'scrollable' frame for actual message content
         self.widget_frame = ttk.Frame(self.canvas, style=self['style'])
         self.widget_frame.columnconfigure(0, weight=1)
+        self.widget_frame.rowconfigure(0, weight=0)
 
         canvas_win_location = (0, 0)
         self.cframe_id = self.canvas.create_window(canvas_win_location,

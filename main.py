@@ -27,8 +27,9 @@ def insert_widgets(index, num):
 if __name__ == '__main__':
     # Toplevel widget
     root = tk.Tk()
-    root.geometry('200x300')
+    root.geometry('600x300')
     root.columnconfigure(0, weight=1)
+    root.columnconfigure(1, weight=4)
     root.rowconfigure(0, weight=1)
     root.rowconfigure(1, weight=0)
 
@@ -40,6 +41,11 @@ if __name__ == '__main__':
 
     style.configure('TestArea.TFrame',
                     background='dark gray')
+
+    style.configure('test.TFrame', background='green')
+
+    frame = ttk.Frame(root, style='test.TFrame')
+    frame.grid(column=1, row=0, sticky=tk.NSEW)
 
     # Listbox
     lb = clb.CustomListbox(root, style='Listbox.TFrame')
